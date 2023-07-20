@@ -8,8 +8,6 @@ from random import randrange
 
 # Создаем множество для исключения похожих координат
 coordinates = {(randrange(1, 9), randrange(1, 9)) for i in range(0, 8)}
-print(coordinates)
-a = list(coordinates)
 
 
 # Проверяем размер множества и пересоздаем в случае несоответствия
@@ -23,7 +21,6 @@ def check_defeat(coordinates):
     count = 0
     if check_identical(coordinates):
         new_coordinates = list(coordinates)
-        print(new_coordinates)
         for i in range(len(new_coordinates)):
             for j in range(i + 1, len(new_coordinates)):
                 count += 1
