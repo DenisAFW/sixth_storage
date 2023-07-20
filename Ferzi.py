@@ -6,27 +6,29 @@
 # # Такое точно было на семинаре?
 from random import randrange
 
-coordinates = [[randrange(1, 9), randrange(1, 9)] for i in range(0, 8)]
+# Создаем множество для исключения похожих координат
+coordinates = {(randrange(1, 9), randrange(1, 9)) for i in range(0, 8)}
+print(coordinates)
+a = list(coordinates)
 
 
+# Проверяем размер множества и пересоздаем в случае несоответствия
 def check_identical(coordinates):
-    # Проверка и регенератор координат в случае одинаковых генераций координат
-    for i in range(len(coordinates)):
-        for j in range(i + 1, len(coordinates)):
-            if coordinates[i] == coordinates[j]:
-                coordinates = [[randrange(1, 9), randrange(1, 9)] for i in range(0, 8)]
-                continue
+    while len(coordinates) != 8:
+        coordinates = {(randrange(1, 9), randrange(1, 9)) for i in range(0, 8)}
     return coordinates
 
 
 def check_defeat(coordinates):
     count = 0
     if check_identical(coordinates):
-        for i in range(len(coordinates)):
-            for j in range(i + 1, len(coordinates)):
+        new_coordinates = list(coordinates)
+        print(new_coordinates)
+        for i in range(len(new_coordinates)):
+            for j in range(i + 1, len(new_coordinates)):
                 count += 1
                 print(f'{count = } - Количество несовпадений ')
-                if coordinates[i][0] == coordinates[j][0] or coordinates[i][1] == coordinates[j][1]:
+                if new_coordinates[i][0] == new_coordinates[j][0] or new_coordinates[i][1] == new_coordinates[j][1]:
                     return True
     else:
         'Увы'
